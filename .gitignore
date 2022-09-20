@@ -1,0 +1,22 @@
+# PyCharm files
+.idea/
+
+# Virtual environments
+.env
+.python-version
+.venv/
+venv/
+
+# Byte-compiled / optimized / DLL files
+__pycache__/
+.pytest_cache/
+*.py[cod]
+*$py.class
+
+
+# Stable diffusion token
+token.txt
+
+
+# Stable diffusion output
+output/

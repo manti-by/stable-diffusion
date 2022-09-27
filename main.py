@@ -1,8 +1,13 @@
 #!/usr/bin/env python
+import argparse
+
 from diffusers import StableDiffusionPipeline
 
+parser = argparse.ArgumentParser(description="Generate an image from text usin Stable Diffusion library.")
+parser.add_argument("text", action="store", type=str, help="Text for generation.")
 
-def main():
+
+def main(text: str) -> None:
     with open("token.txt") as f:
         token = f.read().replace("\n", "")
 
@@ -10,16 +15,11 @@ def main():
         "CompVis/stable-diffusion-v1-4", use_auth_token=token
     ).to("cpu")
 
-    prompt = """
-        Allnite Music boss APOENA returns with the label's second essential release in a mere matter of weeks.
-        Four slices of exceptionally cool house music, from 'Soul People' with its chuntering organs and inspirational
-         rabble rousing sampled from Martin Luther King to 'Meditation' with its cowbell-enhanced groove and oozing, 
-         soulful vocals. The serene glide and billowing synths of 'Jus Dance' and the meditational hypnotism of 
-         'Shapeshifters' complete the package, all going to make one neat selection of tasteful, addictive cuts.
-    """
-    image = pipe(prompt)["sample"][0]
-    image.save("output/out.png")
+    image = pipe(text)["sample"][0]
+    image.save("output.png")
 
 
 if __name__ == "__main__":
-    main()
+    args = parser.parse_args()
+    main(args.text)
+

@@ -13,7 +13,7 @@ def main(text: str) -> None:
 
     pipe = StableDiffusionPipeline.from_pretrained(
         "CompVis/stable-diffusion-v1-4", use_auth_token=token
-    ).to("cpu")
+    )
 
     image = pipe(text)["sample"][0]
     image.save("output.png")
